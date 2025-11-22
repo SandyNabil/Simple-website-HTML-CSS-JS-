@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="form.css" />
+    <title>Form</title>
+</head>
+<body>
+    <div class="aboveFive">
+        <div class="section five">
+            <img width="52.5%" src="./assets/signup-bg.jpg" alt="signup" />
+            <div class="signup">
+                <h2>Sign up</h2>
+                <div class="white">
+                    <input class="firstIn thi" type="text" id="name" placeholder="Your Name" />
+                    <p id="name-error" class="error-message" style="color: red; display: none;"></p>
+
+                    <input id="email" class="firstIn thi" type="text" placeholder="Your Email" />
+                    <p id="email-error" class="error-message" style="color: red; display: none;"></p>
+
+                    <input id="phone" class="firstIn thi" type="text" placeholder="Your Phone" />
+                    <p id="phone-error" class="error-message" style="color: red; display: none;"></p>
+
+                    <input class="firstIn thi" type="text" id="address" placeholder="Your address" />
+                    <div class="gender">
+                        <input type="radio" id="Male" name="gender" value="Male" />
+                        <label for="Male">Male</label>
+                        <input type="radio" id="Female" name="gender" value="Female" />
+                        <label for="Female">Female</label>
+                    </div>
+                    <input class="bigButton" type="button" value="Sign up" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var btn = document.querySelector("input.bigButton");
+
+        btn.addEventListener("click", function () {
+            // Get the input values
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var phone = document.getElementById("phone").value.trim();
+
+            // Error message elements
+            var nameError = document.getElementById("name-error");
+            var emailError = document.getElementById("email-error");
+            var phoneError = document.getElementById("phone-error");
+
+            // Reset error messages
+            nameError.style.display = "none";
+            emailError.style.display = "none";
+            phoneError.style.display = "none";
+
+            let isValid = true;
+
+            // Name validation: Only letters and spaces
+            if (!/^[a-zA-Z\s]+$/.test(name)) {
+                nameError.textContent = "Name must contain only letters and spaces.";
+                nameError.style.display = "block";
+                isValid = false;
+            }
+
+            // Email validation: Simple regex
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                emailError.textContent = "Please enter a valid email address.";
+                emailError.style.display = "block";
+                isValid = false;
+            }
+
+            // Phone validation: Must start with 010, 011, 012, or 015 and be exactly 11 digits
+            if (!/^(010|011|012|015)\d{8}$/.test(phone)) {
+                phoneError.textContent = "Phone number must start with 010, 011, 012, or 015 and be 11 digits long.";
+                phoneError.style.display = "block";
+                isValid = false;
+            }
+
+            // If all validations pass, redirect
+            if (isValid) {
+                window.location.href = `welcome.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+            }
+        });
+    </script>
+</body>
+</html>

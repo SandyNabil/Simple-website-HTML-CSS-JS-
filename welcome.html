@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background:url("assets/bg.jpg");
+        }
+        div{
+            background-color: rgba(245, 245, 245, 0.4);
+            width: 70vw;
+            height: 25vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            color: #d82a4e;
+            font-size: 30px;
+            font-weight: 700;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div>
+    <h1>Welcome Page</h1>
+    <p id="welcome-message"></p>
+    </div>
+
+
+    <script>
+        // Get the query string from the URL
+        const params = new URLSearchParams(window.location.search);
+
+        // Retrieve the "name" and "email" values
+        const name = params.get("name");
+        const email = params.get("email");
+
+        // Display the name and email on the page
+        if (name && email) {
+            document.getElementById("welcome-message").textContent = 
+                `Welcome, ${name}! Your email is ${email}.`;
+        } else {
+            document.getElementById("welcome-message").textContent = 
+                "Welcome! Missing name or email in the URL.";
+        }
+    </script>
+</body>
+</html>
